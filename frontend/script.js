@@ -9,7 +9,7 @@ let sentCount = 0;
 // 本機測試先用 localhost。
 // 部署 Render 後，把這裡改成你的公開 Render URL。
 // 例如：https://your-service.onrender.com
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://chatapp-1-4y1r.onrender.com";
 
 function addMessage(role, text) {
     const div = document.createElement("div");
