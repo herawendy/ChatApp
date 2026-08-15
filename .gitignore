@@ -1,0 +1,14 @@
+# Python virtual environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+
+# Local development-server logs
+.uvicorn.*.log
+.frontend.*.log
+debug.log
+
+# Editor and operating-system files
+.vscode/
+.DS_Store
+Thumbs.db
