@@ -1,51 +1,304 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container {
-    max-width: 700px;
-    margin: 60px auto;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
     background: white;
-    padding: 32px;
     border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
 }
 
-.messages {
-    min-height: 200px;
-    margin: 24px 0;
-    padding: 16px;
-    background: #f2f2f2;
+/* 标题部分 */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin: 30px 0 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* 计算器容器 */
+.calculator-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 40px;
+}
+
+@media (max-width: 768px) {
+    .calculator-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+/* 表单部分 */
+.form-section {
+    background: #f8f9fa;
+    padding: 30px;
     border-radius: 12px;
+    border-left: 4px solid #667eea;
 }
 
-.message {
-    margin-bottom: 14px;
+.form-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.4em;
 }
 
-.user-message {
-    font-weight: bold;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.system-message {
-    opacity: 0.7;
+.form-group label {
+    display: block;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.95em;
 }
 
-.input-row {
-    display: flex;
-    gap: 10px;
-}
-
-input {
-    flex: 1;
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
     padding: 12px;
-    font-size: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-family: inherit;
 }
 
-button {
-    padding: 12px 20px;
+.form-group input[type="number"]:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 复选框样式 */
+.form-group.checkbox {
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.form-group.checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
     cursor: pointer;
+    margin-right: 10px;
+}
+
+.form-group.checkbox label {
+    display: inline;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* 计算按钮 */
+.btn-calculate {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-calculate:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.btn-calculate:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* 结果部分 */
+.result-section {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-section h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.4em;
+}
+
+.result-box {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e8eaf6 100%);
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid #764ba2;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    font-size: 1.05em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.result-item:last-of-type {
+    border-bottom: none;
+}
+
+.result-item .label {
+    color: #666;
+    font-weight: 600;
+}
+
+.result-item .value {
+    color: #333;
+    font-weight: 700;
+}
+
+.result-item.highlight {
+    background: rgba(102, 126, 234, 0.1);
+    padding: 15px;
+    margin: 10px -30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 8px;
+}
+
+.result-item.highlight .label {
+    color: #667eea;
+    font-size: 1.1em;
+}
+
+.result-item.highlight .value {
+    color: #764ba2;
+    font-size: 1.3em;
+}
+
+.divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #667eea, transparent);
+    margin: 15px 0;
+    border: none;
+}
+
+.message-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border-left: 4px solid #667eea;
+}
+
+.message-box .message {
+    color: #333;
+    font-size: 1.05em;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* 重置按钮 */
+.btn-reset {
+    width: 100%;
+    padding: 12px;
+    background: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.btn-reset:hover {
+    background: #e8e8e8;
+    border-color: #667eea;
+    color: #667eea;
+}
+
+/* 错误信息 */
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px;
+    border-left: 4px solid #d32f2f;
+    font-weight: 500;
+}
+
+/* 帮助信息 */
+.help-section {
+    background: #f5f5f5;
+    padding: 30px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.help-section h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.help-section ul {
+    list-style: none;
+}
+
+.help-section li {
+    color: #666;
+    padding: 10px 0;
+    padding-left: 30px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.help-section li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
 }
 
 button:disabled {
